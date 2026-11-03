@@ -1,0 +1,60 @@
+model:
+  name: "model/DeepSeek-R1-Distill-Qwen-7B"
+  trust_remote_code: true
+  torch_dtype: "bfloat16"
+  attn_implementation: "flash_attention_2"
+
+max_prompt_length: 6144
+max_completion_length: 8192
+max_length: 14336
+
+dataset:
+  source_type: "local_jsonl"
+  path: "data/loco_data.jsonl"
+  question_column: "question"
+  prompt_suffix_column: "prompt_suffix"
+  prefix_cot_column: "prefix_cot"
+  chosen_column: "chosen"
+  rejected_column: "rejected"
+  default_prompt_suffix: " Please reason step by step, and put your final answer within \\boxed{}."
+  seed: 42
+
+training:
+  output_dir: "model/LoCo-7B-lora"
+  num_train_epochs: 2
+  gradient_accumulation_steps: 16
+  per_device_train_batch_size: 1
+  logging_steps: 10
+  learning_rate: 0.00001
+  weight_decay: 0.01
+  bf16: true
+  optim: "adamw_torch"
+  warmup_ratio: 0.1
+  max_grad_norm: 1
+  group_by_length: false
+  lr_scheduler_type: "cosine"
+  save_strategy: "steps"
+  save_steps: 100
+  save_total_limit: null
+  report_to: []
+  gradient_checkpointing: true
+  gradient_checkpointing_kwargs:
+    use_reentrant: false
+
+dpo:
+  beta: 0.1
+  loss_type: "sigmoid"
+  label_smoothing: 0.0
+  precompute_ref_log_probs: false
+
+lora:
+  r: 256
+  lora_alpha: 512
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
