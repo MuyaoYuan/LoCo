@@ -1,6 +1,11 @@
 Think Less, Locally: Local Preference Learning for Reasoning Compression
 ========
-* This repository is an official implementation of the paper [Think Less, Locally: Local Preference Learning for Reasoning Compression]().
+* This repository is an official implementation of the paper [Think Less, Locally: Local Preference Learning for Reasoning Compression](http://arxiv.org/abs/2611.04814).
+
+<p align="center">
+&nbsp;&nbsp;<a href="http://arxiv.org/abs/2611.04814"><img src="https://img.shields.io/badge/arXiv-2611.04814-b31b1f" alt="arXiv"></a>
+&nbsp;&nbsp;<a href="https://huggingface.co/MuyaoYuan/LoCo-7B"><img src="https://img.shields.io/badge/%F0%9F%A4%97_Hugging_Face-LoCo--7B-blue" alt="Hugging Face"></a>
+</p>
 
 ## Introduction
 
